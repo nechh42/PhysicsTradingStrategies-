@@ -1,0 +1,18 @@
+name: Daily Trading Signal
+on:
+  schedule:
+    - cron: '0 18 * * *'  # Her gün TSİ 21:00'de
+jobs:
+  generate_signals:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Strategy
+        run: |
+          pip install pandas yfinance
+          python entropy_strategy.py
+      - name: Upload Signals
+        uses: actions/upload-artifact@v3
+        with:
+          name: trading-signals
+          path: trading_signals.csv
