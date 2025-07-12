@@ -1,18 +1,26 @@
 name: Daily Trading Signal
 on:
+  workflow_dispatch:        # Elle başlatmak için
   schedule:
-    - cron: '0 18 * * *'  # Her gün TSİ 21:00'de
+    - cron: '0 18 * * *'    # Her gün TSİ 21:00
+
 jobs:
   generate_signals:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Run Strategy
         run: |
           pip install pandas yfinance
           python entropy_strategy.py
-      - name: Upload Signals
-        uses: actions/upload-artifact@v3
-        with:
-          name: trading-signals
-          path: trading_signals.csv
+
+      - name: Commit and push trading_signals.csv
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add trading_signals.csv
+          git commit -m "Update trading signals [bot]" || echo "No changes to commit"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
