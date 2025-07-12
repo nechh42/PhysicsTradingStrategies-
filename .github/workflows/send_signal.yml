@@ -2,7 +2,7 @@ name: Send Daily Signal
 on:
   workflow_dispatch:        # Elle başlatmak için
   schedule:
-    - cron: '5 18 * * *'    # run_daily'dan 5 dakika SONRA çalışır (çakışmaması için)
+    - cron: '5 18 * * *'    # run_daily'dan 5 dakika SONRA çalışır (çatışmasın diye)
 
 jobs:
   send-signal:
