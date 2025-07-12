@@ -1,0 +1,13 @@
+name: Send Daily Signal
+on:
+  schedule:
+    - cron: '0 18 * * *'  # Her gün TSİ 21:00'de
+jobs:
+  send-signal:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Bot
+        run: |
+          pip install pandas requests
+          python telegram_bot.py
