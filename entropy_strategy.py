@@ -4,7 +4,6 @@ import yfinance as yf
 # SPY verilerini çek
 data = yf.download("SPY", start="2023-01-01", end="2024-07-15")
 
-# Entropi hesapla (basit versiyon)
 def calculate_entropy(window=20):
     data['SMA'] = data['Close'].rolling(window).mean()
     data['STD'] = data['Close'].rolling(window).std()
