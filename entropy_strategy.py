@@ -16,4 +16,4 @@ df['Signal'] = df['Entropy'].apply(lambda x: 'SHORT' if x > 1.65 else 'CASH')
 
 # Sonuçları CSV'ye kaydet
 df.to_csv('trading_signals.csv')
-print("Sinyaller oluşturuldu! GitHub Actions otomatik güncelleyecek.")
+print("Sinyaller oluşturuldu!")
