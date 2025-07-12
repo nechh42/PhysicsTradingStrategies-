@@ -1,13 +1,19 @@
 name: Send Daily Signal
 on:
+  workflow_dispatch:        # Elle başlatmak için
   schedule:
-    - cron: '0 18 * * *'  # Her gün TSİ 21:00'de
+    - cron: '5 18 * * *'    # run_daily'dan 5 dakika SONRA çalışır (çakışmaması için)
+
 jobs:
   send-signal:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Run Bot
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           pip install pandas requests
           python telegram_bot.py
