@@ -4,7 +4,8 @@ from datetime import datetime
 import os
 
 def get_signals():
-    url = "https://raw.githubusercontent.com/nechh42/PhysicsTradingStrategies-/main/trading_signals.csv"
+    # DÜZELTME: - karakteri kaldırıldı
+    url = "https://raw.githubusercontent.com/nechh42/PhysicsTradingStrategies/main/trading_signals.csv"
     return pd.read_csv(url)
 
 signals = get_signals()
@@ -20,3 +21,4 @@ if response.status_code == 200:
     print("Mesaj başarıyla gönderildi.")
 else:
     print(f"Mesaj gönderilemedi. Hata kodu: {response.status_code}")
+    print(f"Hata detayı: {response.text}")
