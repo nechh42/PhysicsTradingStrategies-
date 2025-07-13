@@ -9,18 +9,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
+      
+      - name: Install dependencies
+        run: pip install pandas yfinance requests  # requests eklendi
+        
       - name: Run Strategy
-        run: |
-          pip install pandas yfinance
-          python entropy_strategy.py
-
+        run: python entropy_strategy.py
+        
       - name: Commit and push trading_signals.csv
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
           git add trading_signals.csv
-          git commit -m "Update trading signals [bot]" || echo "No changes to commit"
+          git commit -m "Update trading signals [bot]" 
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
